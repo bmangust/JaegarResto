@@ -1,16 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../store';
+import { RootState } from '@/store/store';
 
-export type Page =
-  | 'Home'
-  | 'Discount'
-  | 'Pie'
-  | 'Message'
-  | 'Bell'
-  | 'Settings';
+const pages = {
+  Home: '',
+  Discount: '',
+  Pie: '',
+  Message: '',
+  Bell: '',
+  Settings: '',
+};
+
+export type Page = keyof typeof pages;
 interface ToolbarState {
   current: Page;
 }
+export const isPage = (value: string): value is Page => {
+  return pages.hasOwnProperty(value);
+};
 
 const initialState: ToolbarState = {
   current: 'Home',

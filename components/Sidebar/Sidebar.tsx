@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {
+  isPage,
   Page,
   selectCurrentPage,
   setCurrentPage,
-} from '../../store/features/toolbar/toolbarSlice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import Flex from '../Flex/Flex';
-import Icon from '../Icon/Icon';
+} from '@/store/features/toolbar/toolbarSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import Flex from '@/components/Flex/Flex';
+import Icon from '@/components/Icon/Icon';
+import Link from 'next/link';
+import { useRouter } from 'next/dist/client/router';
 
 const StyledSidebar = styled.div`
   min-height: 100vh;
   width: 104px;
+  padding-top: 0.5rem;
   background-color: ${({ theme }) => theme.colors.base.darkerBG};
 `;
 
 const Sidebar: React.FC = (props) => {
+  const router = useRouter();
   const active = useAppSelector(selectCurrentPage);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const path = router.route.split('/')[1];
+    if (isPage(path)) setCurrentPage(path);
+  }, []);
+
+  console.log(router);
 
   const icons: Page[] = [
     'Home',
@@ -36,12 +48,15 @@ const Sidebar: React.FC = (props) => {
     <StyledSidebar {...props}>
       <Flex direction="column">
         {icons.map((name) => (
-          <Icon
-            onClick={() => handleClick(name)}
-            key={name}
-            icon={name}
-            active={active === name}
-          />
+          <Link href={name === 'Home' ? '/' : `/${name}`} key={name}>
+            <a style={{ zIndex: active === name ? 2 : 1 }}>
+              <Icon
+                onClick={() => handleClick(name)}
+                icon={name}
+                active={active === name}
+              />
+            </a>
+          </Link>
         ))}
       </Flex>
     </StyledSidebar>

@@ -17,6 +17,7 @@ const StyledIcon = styled.div<IconProps>`
   width: 3.5rem;
   height: 3.5rem;
   padding: 1rem;
+  margin: 0.2rem;
   border-radius: 0.5rem;
   display: grid;
   place-items: center;
@@ -28,6 +29,12 @@ const StyledIcon = styled.div<IconProps>`
   box-shadow: ${({ active, theme }) =>
     active ? '0 8px 24px ' + theme.colors.base.orange : 'none'};
   z-index: ${({ active }) => (active ? 2 : 1)};
+  & svg {
+    transition: 0.3s;
+  }
+  &:hover svg {
+    transform: scale(1.2);
+  }
 `;
 
 export const Icon: React.FC<IconProps> = (props: IconProps) => {
