@@ -8,7 +8,7 @@ import {
 } from '@/store/features/toolbar/toolbarSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import Flex from '@/components/Flex/Flex';
-import Icon from '@/components/Icon/Icon';
+import Icon, { LogoutIcon } from '@/components/Icon/Icon';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 
@@ -16,6 +16,10 @@ const StyledSidebar = styled.div`
   min-height: 100vh;
   width: 104px;
   padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.base.darkerBG};
 `;
 
@@ -59,6 +63,7 @@ const Sidebar: React.FC = (props) => {
           </Link>
         ))}
       </Flex>
+      <LogoutIcon active={false} />
     </StyledSidebar>
   );
 };
