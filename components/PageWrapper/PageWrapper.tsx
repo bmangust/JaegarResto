@@ -10,10 +10,9 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
   min-height: 100vh;
   height: 100vh;
   flex: 1;
-  background-color: #393c49;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  padding: 24px;
 `;
 
 const PageWrapper: React.FC<

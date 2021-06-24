@@ -16,6 +16,7 @@ const StyledSidebar = styled.div`
   min-height: 100vh;
   width: 104px;
   padding-top: 0.5rem;
+  border-radius: 0 8px 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,8 +33,6 @@ const Sidebar: React.FC = (props) => {
     const path = router.route.split('/')[1];
     if (isPage(path)) setCurrentPage(path);
   }, []);
-
-  console.log(router);
 
   const icons: Page[] = [
     'Home',

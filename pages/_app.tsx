@@ -20,7 +20,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="description" content="Jaegar Resto website" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Flex>
+        <Flex
+          style={{
+            backgroundColor: theme.colors.base.darkBG,
+          }}
+          alignItems="flex-start"
+        >
           <Sidebar />
           <PageWrapper>
             <Component {...pageProps} />
