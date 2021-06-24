@@ -42,17 +42,17 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
   const color = props.active ? theme.colors.white : theme.colors.primary;
 
   switch (props.icon) {
-    case 'Home':
+    case 'home':
       return <HomeIcon {...props} color={color} />;
-    case 'Discount':
+    case 'discount':
       return <DiscountIcon {...props} color={color} />;
-    case 'Pie':
+    case 'pie':
       return <PieIcon {...props} color={color} />;
-    case 'Bell':
+    case 'bell':
       return <BellIcon {...props} color={color} />;
-    case 'Message':
+    case 'message':
       return <MessageIcon {...props} color={color} />;
-    case 'Settings':
+    case 'settings':
       return <SettingsIcon {...props} color={color} />;
     default:
       return null;

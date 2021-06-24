@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store/store';
 
 const pages = {
-  Home: '',
-  Discount: '',
-  Pie: '',
-  Message: '',
-  Bell: '',
-  Settings: '',
+  home: '',
+  discount: '',
+  pie: '',
+  message: '',
+  bell: '',
+  settings: '',
 };
 
 export type Page = keyof typeof pages;
@@ -19,7 +19,7 @@ export const isPage = (value: string): value is Page => {
 };
 
 const initialState: ToolbarState = {
-  current: 'Home',
+  current: 'home',
 };
 
 export const toolbarSlice = createSlice({

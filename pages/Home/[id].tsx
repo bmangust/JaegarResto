@@ -1,11 +1,13 @@
+import React from 'react';
+import { useRouter } from 'next/dist/client/router';
 import Header from '@/components/Header/Header';
 import Nav from '@/components/Nav/Nav';
 
-interface HomeProps {}
+interface Props {}
 
-const Home: React.FC<React.HTMLAttributes<HTMLDivElement> & HomeProps> = (
-  props
-) => {
+const Route = (props: Props) => {
+  const router = useRouter();
+
   const elements = [
     'Hot dishes',
     'Cold dishes',
@@ -18,9 +20,9 @@ const Home: React.FC<React.HTMLAttributes<HTMLDivElement> & HomeProps> = (
     <>
       <Header />
       <Nav baseRoute="/home" elements={elements} />
-      Home
+      {router.query.id}
     </>
   );
 };
 
-export default Home;
+export default Route;

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Flex from '../components/Flex/Flex';
-import HomePage from './Home';
 
 export default function Home() {
   return (

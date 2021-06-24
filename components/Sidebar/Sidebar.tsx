@@ -35,12 +35,12 @@ const Sidebar: React.FC = (props) => {
   }, []);
 
   const icons: Page[] = [
-    'Home',
-    'Discount',
-    'Pie',
-    'Message',
-    'Bell',
-    'Settings',
+    'home',
+    'discount',
+    'pie',
+    'message',
+    'bell',
+    'settings',
   ];
 
   const handleClick = (name: Page) => {
@@ -51,8 +51,8 @@ const Sidebar: React.FC = (props) => {
     <StyledSidebar {...props}>
       <Flex direction="column">
         {icons.map((name) => (
-          <Link href={name === 'Home' ? '/' : `/${name}`} key={name}>
-            <a style={{ zIndex: active === name ? 2 : 1 }}>
+          <Link href={name === 'home' ? '/' : `/${name}`} key={name}>
+            <a tabIndex={0} style={{ zIndex: active === name ? 2 : 1 }}>
               <Icon
                 onClick={() => handleClick(name)}
                 icon={name}
