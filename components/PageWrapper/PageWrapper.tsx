@@ -8,11 +8,11 @@ interface PageWrapperProps {
 
 const StyledPageWrapper = styled.div<PageWrapperProps>`
   min-height: 100vh;
-  height: 100vh;
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 24px;
+  margin-left: 104px;
 `;
 
 const PageWrapper: React.FC<

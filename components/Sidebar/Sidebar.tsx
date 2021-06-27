@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 
 const StyledSidebar = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
   min-height: 100vh;
   width: 104px;
   padding-top: 0.5rem;
