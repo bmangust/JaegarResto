@@ -41,7 +41,7 @@ const StyledNav = styled.ul`
     content: '';
     position: absolute;
     left: 0;
-    bottom: -10px;
+    bottom: -0.7rem;
     min-width: 40px;
     width: 60%;
     height: 5px;

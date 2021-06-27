@@ -19,7 +19,7 @@ const StyledTitle = styled.div`
   }
   & .secondary {
     font-weight: 300;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 `;
 
