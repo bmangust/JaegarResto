@@ -9,23 +9,23 @@ interface SearchProps {
 const StyledSearch = styled.div`
   display: flex;
   align-items: center;
-  height: 48px;
-  padding: 14px;
+  height: 2.8rem;
+  padding: 1rem 0.7rem;
   box-sizing: border-box;
   border: 1px solid ${({ theme }) => theme.colors.base.darkLine};
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.base.formBG};
-`;
 
-const StyledInput = styled.input`
-  border: none;
-  outline: none;
-  padding: 0.3rem;
-  background-color: inherit;
-  color: ${({ theme }) => theme.colors.text.light};
-  font-weight: 100;
-  font-size: 10pt;
-  width: 180px;
+  & input {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    background-color: inherit;
+    color: ${({ theme }) => theme.colors.text.light};
+    font-weight: 100;
+    font-size: 0.85rem;
+    width: 240px;
+  }
 `;
 
 const Search = (props: SearchProps) => {
@@ -46,12 +46,12 @@ const Search = (props: SearchProps) => {
   return (
     <StyledSearch>
       <SearchIcon />
-      <StyledInput
+      <input
         value={value}
         onKeyPress={handlePress}
         onChange={handleChange}
         placeholder="Search for food, coffe, etc.."
-      ></StyledInput>
+      />
     </StyledSearch>
   );
 };
