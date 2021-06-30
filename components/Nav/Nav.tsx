@@ -34,14 +34,13 @@ const StyledNav = styled.ul`
     color: ${({ theme }) => theme.colors.primary};
   }
 
-  & li:hover::after,
-  li:active::after,
+  & li:active::after,
   li:focus::after,
   .active::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -0.7rem;
+    bottom: -0.3rem;
     min-width: 40px;
     width: 60%;
     height: 5px;

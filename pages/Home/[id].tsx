@@ -27,9 +27,7 @@ const Route = (props: Props) => {
     <>
       <Header />
       <Nav baseRoute="/home" elements={elements} />
-      {router.query.id && (
-        <MenuList title={router.query.id.toString()} items={items} />
-      )}
+      {router.query.id && <MenuList title="Choose dishes" items={items} />}
     </>
   );
 };
