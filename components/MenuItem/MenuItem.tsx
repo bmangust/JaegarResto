@@ -12,6 +12,7 @@ const StyledMenuItem = styled.div`
   min-height: 340px;
   width: 300px;
   margin: 10px;
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,12 +22,13 @@ const StyledMenuItem = styled.div`
   & span,
   & img {
     z-index: 2;
-    max-width: 60%;
+    max-width: 80%;
     text-align: center;
   }
 
   & img {
-    width: 50%;
+    width: 70%;
+    object-fit: cover;
     margin-bottom: 1rem;
   }
 
@@ -38,6 +40,9 @@ const StyledMenuItem = styled.div`
     height: 80%;
     border-radius: 1rem;
     background-color: ${({ theme }) => theme.colors.base.darkerBG};
+  }
+  & .title {
+    flex-grow: 1;
   }
   & .price {
     margin-top: 0.9rem;

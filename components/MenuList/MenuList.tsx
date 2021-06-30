@@ -9,14 +9,17 @@ interface MenuListProps {
 
 const StyledContainer = styled.div<MenuListProps>`
   width: 100%;
+  margin-top: 1rem;
   color: ${({ theme }) => theme.colors.white};
 
-  & .title {
+  & > .title {
+    font-size: 1.3rem;
   }
 
   & .grid {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   & .grid .item {
@@ -26,14 +29,17 @@ const StyledContainer = styled.div<MenuListProps>`
 `;
 
 const MenuList: React.FC<MenuListProps> = (props) => {
+  const items = props.items.length ? (
+    props.items.map((item) => (
+      <MenuItem key={item.id} className="item" item={item} />
+    ))
+  ) : (
+    <p>No items to show</p>
+  );
   return (
     <StyledContainer {...props}>
       <span className="title">{props.title}</span>
-      <div className="grid">
-        {props.items.map((item) => (
-          <MenuItem key={item.title} className="item" item={item} />
-        ))}
-      </div>
+      <div className="grid">{items}</div>
     </StyledContainer>
   );
 };
