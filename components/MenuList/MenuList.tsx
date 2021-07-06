@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { Dish } from '../../store/features/menu/menuSlice';
 import MenuItem from '../MenuItem/MenuItem';
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 
 interface MenuListProps {
   title: string;
   items: Dish[];
 }
 
-const StyledContainer = styled.div<MenuListProps>`
+const StyledContainer = styled(motion.div)`
   width: 100%;
   margin-top: 1rem;
   color: ${({ theme }) => theme.colors.white};
@@ -28,7 +30,26 @@ const StyledContainer = styled.div<MenuListProps>`
   }
 `;
 
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      ease: 'easeInOut',
+    },
+  },
+  hidden: {
+    opacity: 0,
+  },
+};
+
 const MenuList: React.FC<MenuListProps> = (props) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start('visible');
+  }, [props.items]);
+
   const items = props.items.length ? (
     props.items.map((item) => (
       <MenuItem key={item.id} className="item" item={item} />
@@ -36,10 +57,21 @@ const MenuList: React.FC<MenuListProps> = (props) => {
   ) : (
     <p>No items to show</p>
   );
+
+  console.log(props.items);
+
   return (
-    <StyledContainer {...props}>
+    <StyledContainer>
       <span className="title">{props.title}</span>
-      <div className="grid">{items}</div>
+      <motion.div
+        className="grid"
+        variants={list}
+        animate={controls}
+        initial="hidden"
+        exit="exit"
+      >
+        {items}
+      </motion.div>
     </StyledContainer>
   );
 };

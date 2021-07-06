@@ -1,12 +1,13 @@
 import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
+import { motion, Variants } from 'framer-motion';
 
 interface MenuItemProps {
   item: Dish;
   className: string;
 }
 
-const StyledMenuItem = styled.div`
+const StyledMenuItem = styled(motion.div)`
   position: relative;
   min-width: 100px;
   min-height: 340px;
@@ -53,9 +54,17 @@ const StyledMenuItem = styled.div`
   }
 `;
 
+const variants = {
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+  hidden: { opacity: 0, scale: 0.5 },
+};
+
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   return (
-    <StyledMenuItem>
+    <StyledMenuItem variants={variants}>
       <img src={item.image} />
       <span className="title">{item.title}</span>
       <span className="price">{item.price}</span>

@@ -11,7 +11,6 @@ interface Props {}
 const Route = (props: Props) => {
   const router = useRouter();
   const dishes = useAppSelector(selectMenu);
-  console.log(dishes);
 
   const items = dishes.filter((item) => item.category === router.query.id);
 
