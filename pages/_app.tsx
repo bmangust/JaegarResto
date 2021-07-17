@@ -2,14 +2,19 @@ import React from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import '@/styles/globals.css';
 import theme from '@/styles/theme';
 import { store } from '@/store/store';
-import Flex from '@/components/Flex/Flex';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import PageWrapper from '../components/PageWrapper/PageWrapper';
+
+const StyledApp = styled.div`
+  display: flex;
+  align-items: flex-start;
+  background-color: ${({ theme }) => theme.colors.base.darkBG};
+`;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -24,17 +29,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           ></meta>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Flex
-          style={{
-            backgroundColor: theme.colors.base.darkBG,
-          }}
-          alignItems="flex-start"
-        >
+        <StyledApp>
           <Sidebar />
           <PageWrapper>
             <Component {...pageProps} />
           </PageWrapper>
-        </Flex>
+        </StyledApp>
       </ThemeProvider>
     </Provider>
   );

@@ -21,6 +21,7 @@ const StyledNav = styled.ul`
     font-size: 0.9rem;
     position: relative;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   & li:last-child {
