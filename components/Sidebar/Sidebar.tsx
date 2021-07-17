@@ -17,14 +17,20 @@ const StyledSidebar = styled.div`
   left: 0;
   top: 0;
   min-height: 100vh;
-  width: 104px;
+  width: 125px;
   padding-top: 0.5rem;
-  border-radius: 0 8px 8px 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.base.darkerBG};
+
+  & > div {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 `;
 
 const Sidebar: React.FC = (props) => {
@@ -52,20 +58,23 @@ const Sidebar: React.FC = (props) => {
 
   return (
     <StyledSidebar {...props}>
-      <Flex direction="column">
-        {icons.map((name) => (
-          <Link href={name === 'home' ? '/' : `/${name}`} key={name}>
-            <a tabIndex={0} style={{ zIndex: active === name ? 2 : 1 }}>
-              <Icon
-                onClick={() => handleClick(name)}
-                icon={name}
-                active={active === name}
-              />
-            </a>
-          </Link>
-        ))}
-      </Flex>
-      <LogoutIcon active={false} />
+      {/* <div> */}
+      {icons.map((name) => (
+        <Link href={name === 'home' ? '/' : `/${name}`} key={name}>
+          <a tabIndex={0} style={{ zIndex: active === name ? 2 : 1 }}>
+            <Icon
+              onClick={() => handleClick(name)}
+              icon={name}
+              active={active === name}
+              className={active === name ? 'active' : ''}
+            />
+          </a>
+        </Link>
+      ))}
+      {/* </div> */}
+      <div>
+        <LogoutIcon active={false} />
+      </div>
     </StyledSidebar>
   );
 };

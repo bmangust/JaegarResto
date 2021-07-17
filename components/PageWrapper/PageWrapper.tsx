@@ -12,7 +12,7 @@ const StyledPageWrapper = styled.div<PageWrapperProps>`
   display: flex;
   flex-direction: column;
   padding: 24px;
-  margin-left: 104px;
+  margin-left: 125px;
 `;
 
 const PageWrapper: React.FC<
