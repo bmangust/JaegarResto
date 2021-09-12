@@ -54,17 +54,20 @@ const Nav = ({ elements, baseRoute }: Props) => {
   const router = useRouter();
   return (
     <StyledNav>
-      {elements.map((el) => (
-        <li
-          key={el}
-          tabIndex={1}
-          className={router.query.id === el ? 'active' : ''}
-        >
-          <Link href={`${baseRoute}/${encodeURI(el)}`}>
-            <a>{el}</a>
-          </Link>
-        </li>
-      ))}
+      {elements.map((el) => {
+        const elm = el.replaceAll(' ', '-');
+        return (
+          <li
+            key={el}
+            tabIndex={1}
+            className={router.query.id === elm ? 'active' : ''}
+          >
+            <Link href={`${baseRoute}/${elm}`}>
+              <a>{el}</a>
+            </Link>
+          </li>
+        );
+      })}
     </StyledNav>
   );
 };

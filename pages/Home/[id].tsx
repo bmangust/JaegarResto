@@ -1,32 +1,43 @@
 import React from 'react';
-import { useRouter } from 'next/dist/client/router';
 import Header from '@/components/Header/Header';
 import Nav from '@/components/Nav/Nav';
-import { selectMenu } from '@/store/features/menu/menuSlice';
-import { useAppSelector } from '@/store/hooks';
+import { Dish } from '@/store/features/menu/menuSlice';
 import MenuList from '../../components/MenuList/MenuList';
+import { GetStaticProps } from 'next';
+import { initialDishes, categories } from '@/store/features/menu/initialDishes';
 
-interface Props {}
+interface Props {
+  items: Dish[];
+}
 
-const Route = (props: Props) => {
-  const router = useRouter();
-  const dishes = useAppSelector(selectMenu);
+export async function getStaticPaths() {
+  const paths = categories.map((category) => ({
+    params: {
+      id: category.replaceAll(' ', '-'),
+    },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
+}
 
-  const items = dishes.filter((item) => item.category === router.query.id);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = `${params?.id}`;
+  const items = initialDishes.filter(
+    (item) => item.category.replaceAll(' ', '-') === params?.id
+  );
+  return {
+    props: { items },
+  };
+};
 
-  const elements = [
-    'Hot dishes',
-    'Cold dishes',
-    'Soup',
-    'Grill',
-    'Appetizer',
-    'Dessert',
-  ];
+const Route = ({ items }: Props) => {
   return (
     <>
       <Header />
-      <Nav baseRoute="/home" elements={elements} />
-      {router.query.id && <MenuList title="Choose dishes" items={items} />}
+      <Nav baseRoute="/home" elements={categories} />
+      <MenuList title="Choose dishes" items={items} />
     </>
   );
 };

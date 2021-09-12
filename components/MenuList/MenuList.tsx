@@ -58,8 +58,6 @@ const MenuList: React.FC<MenuListProps> = (props) => {
     <p>No items to show</p>
   );
 
-  console.log(props.items);
-
   return (
     <StyledContainer>
       <span className="title">{props.title}</span>
