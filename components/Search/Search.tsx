@@ -1,3 +1,5 @@
+import { searchDishes } from '@/store/features/menu/menuSlice';
+import { useAppDispatch } from '@/store/hooks';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from './SearchIcon';
@@ -30,10 +32,12 @@ const StyledSearch = styled.div`
 
 const Search = (props: SearchProps) => {
   const [value, setValue] = useState('');
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     setValue(e.currentTarget.value);
+    dispatch(searchDishes({ search: e.currentTarget.value }));
   };
   const handlePress = (e: React.KeyboardEvent) => {
     e.stopPropagation();

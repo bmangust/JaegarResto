@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { Dish } from '../../store/features/menu/menuSlice';
 import MenuItem from '../MenuItem/MenuItem';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
+import { useAppSelector } from '@/store/hooks';
 
 interface MenuListProps {
   title: string;
-  items: Dish[];
 }
 
 const StyledContainer = styled(motion.div)`
@@ -44,14 +43,15 @@ const list = {
 };
 
 const MenuList: React.FC<MenuListProps> = (props) => {
+  const dishes = useAppSelector((state) => state.menu.dishes);
   const controls = useAnimation();
 
   useEffect(() => {
     controls.start('visible');
-  }, [props.items]);
+  }, [dishes]);
 
-  const items = props.items.length ? (
-    props.items.map((item) => (
+  const items = dishes?.length ? (
+    dishes.map((item) => (
       <MenuItem key={item.id} className="item" item={item} />
     ))
   ) : (
