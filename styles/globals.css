@@ -19,7 +19,7 @@ a {
 }
 
 a:hover {
-  text-shadow: 0 0 5px white;
+  text-shadow: 0 0 5px;
 }
 
 * {
