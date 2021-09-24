@@ -17,7 +17,6 @@ export async function getStaticPaths() {
       id: category.replaceAll(' ', '-'),
     },
   }));
-  console.log(paths);
   return {
     paths,
     fallback: false,
@@ -34,13 +33,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 /**
- * getStaticProps выдает массив блюд для текущей категории
- * мы его сохраняем в state.menu.initialDishes в хуке useEffect при загрузке страницы
- * поиск работает c state.menu.initialDishes, сохраняет в state.menu.dishes
- * компонент MenuList рендерит state.menu.dishes
- *
- * TODO:
- * разобраться, почему на странице home не работает getStaticProps()
+ * 1. getStaticProps passes Dish array into this page for every category
+ * 2. saveMenuSlice saves it into state.menu.initialDishes redux state
+ * 3. search users state.menu.initialDishes, saves reslts in state.menu.dishes
+ * 4. MenuList renders state.menu.dishes
  */
 
 const Route = ({ items }: Props) => {
