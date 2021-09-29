@@ -8,7 +8,7 @@ import '@/styles/globals.css';
 import theme from '@/styles/theme';
 import { store } from '@/store/store';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import PageWrapper from '../components/PageWrapper/PageWrapper';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 const StyledApp = styled.div`
   display: flex;
