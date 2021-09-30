@@ -1,6 +1,7 @@
 const dark = {
   colors: {
     white: '#FFFFFF',
+    black: '#000000',
     primary: '#EA7C69',
     secondary: '#9288E0',
     textLighter: '#E0E6E9',
@@ -31,5 +32,6 @@ const dark = {
 };
 
 export type Theme = typeof dark;
+export type AccentType = keyof typeof dark.colors.accent;
 const theme: Theme = dark;
 export default theme;
