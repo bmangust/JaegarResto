@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/Button/Button';
 import Delivery from '@/components/Delivery/Delivery';
+import CartList from '../CartList/CartList';
 
 const StyledContainer = styled(motion.div)`
   width: max(30vw, 400px);
@@ -14,7 +15,7 @@ const StyledContainer = styled(motion.div)`
   flex-direction: column;
   justify-content: space-between;
 
-  & .header {
+  & .cart-header {
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -30,10 +31,11 @@ const StyledContainer = styled(motion.div)`
 function Cart() {
   return (
     <StyledContainer>
-      <div className="header">
+      <div className="cart-header">
         <h2 className="title">Order #12345</h2>
         <Delivery />
       </div>
+      <CartList />
       <Button>Continue to Payment</Button>
     </StyledContainer>
   );
