@@ -1,34 +1,12 @@
 import { searchDishes } from '@/store/features/menu/menuSlice';
 import { useAppDispatch } from '@/store/hooks';
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import Input from '@/components/Input/Input';
 import SearchIcon from './SearchIcon';
 
 interface SearchProps {
   onSubmit: (value: string) => void;
 }
-
-const StyledSearch = styled.div`
-  display: flex;
-  align-items: center;
-  height: 2.8rem;
-  padding: 1rem 0.7rem;
-  box-sizing: border-box;
-  border: 1px solid ${({ theme }) => theme.colors.base.darkLine};
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.base.formBG};
-
-  & input {
-    border: none;
-    outline: none;
-    padding: 0.5rem;
-    background-color: inherit;
-    color: ${({ theme }) => theme.colors.text.light};
-    font-weight: 100;
-    font-size: 0.85rem;
-    width: 240px;
-  }
-`;
 
 const Search = (props: SearchProps) => {
   const [value, setValue] = useState('');
@@ -48,15 +26,13 @@ const Search = (props: SearchProps) => {
   };
 
   return (
-    <StyledSearch>
-      <SearchIcon />
-      <input
-        value={value}
-        onKeyPress={handlePress}
-        onChange={handleChange}
-        placeholder="Search for food, coffe, etc.."
-      />
-    </StyledSearch>
+    <Input
+      icon={<SearchIcon />}
+      value={value}
+      onChange={handleChange}
+      onKeyPress={handlePress}
+      placeholder="Search for food, coffe, etc.."
+    />
   );
 };
 

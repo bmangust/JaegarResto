@@ -65,6 +65,7 @@ const Sidebar: React.FC = (props) => {
             <Icon
               onClick={() => handleClick(name)}
               icon={name}
+              width="3.5rem"
               active={active === name}
               className={active === name ? 'active' : ''}
             />
