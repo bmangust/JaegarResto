@@ -8,6 +8,7 @@ const pages = {
   message: '',
   bell: '',
   settings: '',
+  delete: '',
 };
 
 export type Page = keyof typeof pages;
