@@ -1,6 +1,8 @@
 import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
 import { motion, Variants } from 'framer-motion';
+import { useAppDispatch } from '@/store/hooks';
+import { addItemToCart } from '@/store/features/cart/cartSlice';
 
 interface MenuItemProps {
   item: Dish;
@@ -19,6 +21,7 @@ const StyledMenuItem = styled(motion.div)`
   align-items: center;
   justify-content: center;
   font-weight: 300;
+  cursor: pointer;
 
   & span,
   & img {
@@ -63,8 +66,12 @@ const variants = {
 };
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
+  const dispatch = useAppDispatch();
+  const handleClick = () => {
+    dispatch(addItemToCart(item));
+  };
   return (
-    <StyledMenuItem variants={variants}>
+    <StyledMenuItem onClick={handleClick} variants={variants}>
       <img src={item.image} />
       <span className="title">{item.title}</span>
       <span className="price">{item.price}</span>

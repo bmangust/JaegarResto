@@ -2,10 +2,17 @@ import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
 import Icon from '@/components/Icon/Icon';
 import Input from '@/components/Input/Input';
+import {
+  deleteItemFromCart,
+  ICartItem,
+  updateItemInCart,
+  updateOrderNote,
+} from '@/store/features/cart/cartSlice';
+import React from 'react';
+import { useAppDispatch } from '@/store/hooks';
 
 interface Props {
-  item: Dish;
-  quantity: number;
+  item: ICartItem;
 }
 const StyledDiv = styled.div`
   color: ${({ theme }) => theme.colors.white};
@@ -58,6 +65,7 @@ const StyledDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    white-space: nowrap;
   }
 
   & .item-footer {
@@ -66,7 +74,7 @@ const StyledDiv = styled.div`
     justify-content: space-between;
   }
 
-  & .comments {
+  & .orderNote {
     width: 100%;
   }
 
@@ -92,42 +100,71 @@ const StyledDiv = styled.div`
   }
 `;
 
-const CartItem = ({ item, quantity }: Props) => {
+const CartItem = ({ item }: Props) => {
   if (!item) return <span>nothing</span>;
-  const handleClick = () => {};
+  const dispatch = useAppDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteItemFromCart(item.item));
+  };
+  const updateNote = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const payload = {
+      item: item.item,
+      note: e.currentTarget.value,
+    };
+    dispatch(updateOrderNote(payload));
+  };
+  const updateQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value === '') return;
+    const quantity = +e.currentTarget.value;
+    if (isNaN(quantity)) return;
+    const payload = {
+      item: item.item,
+      quantity,
+    };
+    dispatch(updateItemInCart(payload));
+  };
+
+  const roundedQuantity =
+    Math.round(item.item.price * item.quantity * 100) / 100;
+
   return (
     <StyledDiv>
       <div className="item-header">
         <div className="col1">
-          <img className="img" src={item.image} alt={`${item.title} image`} />
+          <img
+            className="img"
+            src={item.item.image}
+            alt={`${item.item.title} image`}
+          />
           <div className="titleWrapper">
-            <span className="title">{item.title}</span>
-            <span className="price">$ {item.price}</span>
+            <span className="title">{item.item.title}</span>
+            <span className="price">$ {item.item.price}</span>
           </div>
           <Input
             className="quantity"
             align="center"
             width="47px"
-            value={quantity}
-            onChange={() => {}}
+            value={item.quantity}
+            onChange={updateQuantity}
           />
         </div>
-        <span className="total">$ {item.price * quantity}</span>
+        <span className="total">$ {roundedQuantity}</span>
       </div>
       <div className="item-footer">
         <div className="col1">
           <Input
-            className="comments"
+            className="orderNote"
             width="250px"
-            value={''}
-            onChange={() => {}}
+            value={item.note}
+            onChange={updateNote}
             placeholder="Order note..."
           />
         </div>
         <div className="total">
           <button className="button">
             <Icon
-              onClick={handleClick}
+              onClick={handleDelete}
               icon="delete"
               color="white"
               active={false}

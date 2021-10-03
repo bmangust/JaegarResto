@@ -14,6 +14,9 @@ const StyledContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  left: 0;
 
   & .cart-header {
     height: 100px;
