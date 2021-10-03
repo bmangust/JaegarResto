@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export type InputProps = {
   width?: string;
   color?: string;
+  align?: 'center' | 'left' | 'right';
 };
 
 type Props = InputProps & {
@@ -34,15 +35,15 @@ const StyledInput = styled.div<InputProps>`
     font-weight: 100;
     font-size: 0.85rem;
     width: ${({ width = '240px' }) => width};
+    text-align: ${({ align = 'left' }) => align};
   }
 `;
 
 const Input = (props: Props) => {
   return (
-    <StyledInput className={props.className} width={props.width}>
+    <StyledInput {...props}>
       {props.icon}
       <input
-        //   width=""
         value={props.value}
         onKeyPress={props.onKeyPress}
         onChange={props.onChange}

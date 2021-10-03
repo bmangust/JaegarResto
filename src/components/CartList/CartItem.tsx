@@ -1,7 +1,6 @@
 import { Dish } from '@/store/features/menu/menuSlice';
-import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
-import Icon, { DeleteIcon } from '@/components/Icon/Icon';
+import Icon from '@/components/Icon/Icon';
 import Input from '@/components/Input/Input';
 
 interface Props {
@@ -28,7 +27,8 @@ const StyledDiv = styled.div`
   }
 
   & .item-header .titleWrapper {
-    width: calc(60% - 50px);
+    /* 50px image + 10px margin + 60px input + 10px margin */
+    width: calc(100% - 60px - 70px);
     height: 50px;
     display: flex;
     flex-direction: column;
@@ -47,9 +47,14 @@ const StyledDiv = styled.div`
     font-size: 0.7rem;
   }
 
+  & .quantity {
+    width: 60px;
+    margin-left: 10px;
+    padding: 10px 5px;
+  }
+
   & .total {
     width: 20%;
-    margin-left: 10px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -61,8 +66,15 @@ const StyledDiv = styled.div`
     justify-content: space-between;
   }
 
-  & .item-footer .comments {
+  & .comments {
+    width: 100%;
+  }
+
+  & .col1 {
     width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   & .item-footer .button {
@@ -86,27 +98,32 @@ const CartItem = ({ item, quantity }: Props) => {
   return (
     <StyledDiv>
       <div className="item-header">
-        <img className="img" src={item.image} alt={`${item.title} image`} />
-        <div className="titleWrapper">
-          <span className="title">{item.title}</span>
-          <span className="price">$ {item.price}</span>
+        <div className="col1">
+          <img className="img" src={item.image} alt={`${item.title} image`} />
+          <div className="titleWrapper">
+            <span className="title">{item.title}</span>
+            <span className="price">$ {item.price}</span>
+          </div>
+          <Input
+            className="quantity"
+            align="center"
+            width="47px"
+            value={quantity}
+            onChange={() => {}}
+          />
         </div>
-        <Input
-          className="quantity"
-          width="30px"
-          value={quantity}
-          onChange={() => {}}
-        />
         <span className="total">$ {item.price * quantity}</span>
       </div>
       <div className="item-footer">
-        <Input
-          className="comments"
-          width="180px"
-          value={''}
-          onChange={() => {}}
-          placeholder="Order note..."
-        />
+        <div className="col1">
+          <Input
+            className="comments"
+            width="250px"
+            value={''}
+            onChange={() => {}}
+            placeholder="Order note..."
+          />
+        </div>
         <div className="total">
           <button className="button">
             <Icon

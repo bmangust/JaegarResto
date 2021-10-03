@@ -7,6 +7,7 @@ function CartList() {
   return (
     <div>
       <CartItem item={items[0]} quantity={1} />
+      <CartItem item={items[2]} quantity={22} />
     </div>
   );
 }
