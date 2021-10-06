@@ -10,11 +10,12 @@ import {
 } from '@/store/features/cart/cartSlice';
 import React from 'react';
 import { useAppDispatch } from '@/store/hooks';
+import { motion } from 'framer-motion';
 
 interface Props {
   item: ICartItem;
 }
-const StyledDiv = styled.div`
+const StyledDiv = styled(motion.div)`
   color: ${({ theme }) => theme.colors.white};
   font-size: 1rem;
   height: 150px;
@@ -92,6 +93,7 @@ const StyledDiv = styled.div`
     border-radius: 10px;
     width: 60px;
     margin-left: 10px;
+    margin-right: 3px;
     transform: scale(1);
     transition: 0.3s;
   }
@@ -99,6 +101,19 @@ const StyledDiv = styled.div`
     transform: scale(1.1);
   }
 `;
+
+const variants = {
+  animate: {
+    x: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
+  initial: { x: '-100%' },
+  exit: {
+    x: '-100%',
+  },
+};
 
 const CartItem = ({ item }: Props) => {
   if (!item) return <span>nothing</span>;
@@ -129,7 +144,7 @@ const CartItem = ({ item }: Props) => {
     Math.round(item.item.price * item.quantity * 100) / 100;
 
   return (
-    <StyledDiv>
+    <StyledDiv key={item.item.id} {...variants}>
       <div className="item-header">
         <div className="col1">
           <img

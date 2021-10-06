@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import MenuItem from '../MenuItem/MenuItem';
-import { motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import { useAppSelector } from '@/store/hooks';
 
@@ -29,7 +29,7 @@ const StyledContainer = styled(motion.div)`
   }
 `;
 
-const list = {
+const variants = {
   visible: {
     opacity: 1,
     transition: {
@@ -39,6 +39,9 @@ const list = {
   },
   hidden: {
     opacity: 0,
+  },
+  exit: {
+    x: 1000,
   },
 };
 
@@ -63,12 +66,12 @@ const MenuList: React.FC<MenuListProps> = (props) => {
       <span className="title">{props.title}</span>
       <motion.div
         className="grid"
-        variants={list}
+        variants={variants}
         animate={controls}
         initial="hidden"
         exit="exit"
       >
-        {items}
+        <AnimatePresence>{items}</AnimatePresence>
       </motion.div>
     </StyledContainer>
   );

@@ -58,11 +58,11 @@ const StyledMenuItem = styled(motion.div)`
 `;
 
 const variants = {
-  visible: {
+  animate: {
     opacity: 1,
     scale: 1,
   },
-  hidden: { opacity: 0, scale: 0.5 },
+  initial: { opacity: 0, scale: 0.5 },
 };
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
@@ -71,10 +71,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
     dispatch(addItemToCart(item));
   };
   return (
-    <StyledMenuItem onClick={handleClick} variants={variants}>
+    <StyledMenuItem onClick={handleClick} {...variants}>
       <img src={item.image} />
       <span className="title">{item.title}</span>
-      <span className="price">{item.price}</span>
+      <span className="price">$ {item.price}</span>
       <span className="avalible">{item.avalible} bowls avalible</span>
       <div className="bg" />
     </StyledMenuItem>
