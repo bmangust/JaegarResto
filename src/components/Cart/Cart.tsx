@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/Button/Button';
 import Delivery from '@/components/Delivery/Delivery';
-import CartList from '../CartList/CartList';
+import CartList from './CartList';
 
 const StyledContainer = styled(motion.div)`
   width: max(30vw, 400px);
