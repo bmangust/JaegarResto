@@ -5,11 +5,11 @@ export interface Dish {
   price: number;
   avalible: number;
   image: string;
+  discount?: number;
 }
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/store/store';
-import { initialDishes } from './initialDishes';
 
 interface MenuState {
   dishes: Dish[];

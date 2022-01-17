@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { motion, Variants } from 'framer-motion';
 import { useAppDispatch } from '@/store/hooks';
 import { addItemToCart } from '@/store/features/cart/cartSlice';
+import Discount from './Discount';
+import Price from './Price';
 
 interface MenuItemProps {
   item: Dish;
@@ -48,10 +50,6 @@ const StyledMenuItem = styled(motion.div)`
   & .title {
     flex-grow: 1;
   }
-  & .price {
-    margin-top: 0.9rem;
-    margin-bottom: 0.2rem;
-  }
   & .avalible {
     color: ${({ theme }) => theme.colors.text.light};
   }
@@ -74,8 +72,9 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
     <StyledMenuItem onClick={handleClick} {...variants}>
       <img src={item.image} />
       <span className="title">{item.title}</span>
-      <span className="price">$ {item.price}</span>
+      <Price price={item.price} discount={item.discount} />
       <span className="avalible">{item.avalible} bowls avalible</span>
+      <Discount discount={item.discount} />
       <div className="bg" />
     </StyledMenuItem>
   );

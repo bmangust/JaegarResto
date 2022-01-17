@@ -8,6 +8,7 @@ export const initialDishes: Dish[] = [
     price: 2.29,
     avalible: 20,
     image: '/images/Image 1.png',
+    discount: 20,
   },
   {
     id: 1,
