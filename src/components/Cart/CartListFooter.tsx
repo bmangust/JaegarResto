@@ -20,13 +20,12 @@ const Div = styled.div`
 const CartListFooter = () => {
   const items = useAppSelector((state) => state.cart.items);
   const discount = 0;
-  const total =
-    Math.round(
-      items.reduce((prev, cur) => {
-        prev += cur.item.price * cur.quantity;
-        return prev;
-      }, 0) * 100
-    ) / 100;
+  const total = items
+    .reduce((prev, cur) => {
+      prev += cur.item.price * cur.quantity;
+      return prev;
+    }, 0)
+    .toFixed(2);
 
   return (
     <Div>

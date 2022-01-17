@@ -141,8 +141,7 @@ const CartItem = ({ item }: Props) => {
     dispatch(updateItemInCart(payload));
   };
 
-  const roundedQuantity =
-    Math.round(item.item.price * item.quantity * 100) / 100;
+  const roundedQuantity = (item.item.price * item.quantity).toFixed(2);
 
   return (
     <StyledDiv key={item.item.id} {...variants}>
