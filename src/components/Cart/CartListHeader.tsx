@@ -5,9 +5,8 @@ const StyledDiv = styled.div`
   font-size: 1rem;
   font-weight: 700;
   height: 70px;
-  /* padding-bottom: 5px; */
   margin-bottom: 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkLine};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkBG};
   display: flex;
   align-items: center;
 

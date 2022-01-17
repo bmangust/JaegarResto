@@ -22,6 +22,7 @@ const StyledDiv = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: space-between;
+  margin-bottom: 1rem;
 
   & .item-header {
     display: flex;
@@ -43,14 +44,14 @@ const StyledDiv = styled(motion.div)`
     justify-content: space-around;
   }
 
-  & .item-header .titleWrapper .title {
+  & .item-header .titleWrapper .item-title {
     font-size: 0.9rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     margin-right: 10px;
   }
-  & .item-header .titleWrapper .price {
+  & .item-header .titleWrapper .item-price {
     color: ${({ theme }) => theme.colors.text.gray};
     font-size: 0.7rem;
   }
@@ -153,8 +154,8 @@ const CartItem = ({ item }: Props) => {
             alt={`${item.item.title} image`}
           />
           <div className="titleWrapper">
-            <span className="title">{item.item.title}</span>
-            <span className="price">$ {item.item.price}</span>
+            <span className="item-title">{item.item.title}</span>
+            <span className="item-price">$ {item.item.price}</span>
           </div>
           <Input
             className="quantity"

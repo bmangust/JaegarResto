@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '@/components/Button/Button';
 import Delivery from '@/components/Delivery/Delivery';
 import CartList from './CartList';
+import CartListFooter from './CartListFooter';
 
 const StyledContainer = styled(motion.div)`
   width: max(30vw, 400px);
@@ -28,6 +29,7 @@ const StyledContainer = styled(motion.div)`
   & .title {
     font-size: max(1.5rem, 24pt);
     margin: 0;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -39,6 +41,7 @@ function Cart() {
         <Delivery />
       </div>
       <CartList />
+      <CartListFooter />
       <Button>Continue to Payment</Button>
     </StyledContainer>
   );
