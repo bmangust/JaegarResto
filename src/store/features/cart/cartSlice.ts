@@ -76,11 +76,13 @@ const cartSlice = createSlice({
       state,
       { payload }: PayloadAction<IUpdateOrderNotePayload>
     ) {
+      if (!payload.note) return;
       const index = state.items.findIndex(
         (cartItem) => cartItem.item.id === payload.item.id
       );
       if (index < 0) throw new Error('[updateOrderNote] No dish found!');
-      else state.items[index].note = payload.note;
+      if (state.items[index].note === payload.note) return;
+      state.items[index].note = payload.note;
     },
   },
 });
