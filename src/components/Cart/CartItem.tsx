@@ -18,88 +18,81 @@ interface Props {
 const StyledDiv = styled(motion.div)`
   color: ${({ theme }) => theme.colors.white};
   font-size: 1rem;
-  height: 150px;
+  /* height: 150px; */
   display: flex;
-  flex-direction: column;
-  align-items: space-between;
+  gap: 10px;
   margin-bottom: 1rem;
 
-  & .item-header {
-    display: flex;
+  .itemData {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 50px minmax(100px, 1fr) 80px;
+    grid-auto-rows: 60px;
     align-items: center;
+    margin-bottom: 10px;
   }
 
-  & .item-header .img {
-    width: 50px;
+  .itemData-img {
     height: 50px;
-    margin-right: 10px;
   }
 
-  & .item-header .titleWrapper {
-    /* 50px image + 10px margin + 60px input + 10px margin */
-    width: calc(100% - 60px - 70px);
-    height: 50px;
+  .itemData-titleWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+
+    .itemData-title {
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .itemData-price {
+      color: ${({ theme }) => theme.colors.text.gray};
+      font-size: 0.7rem;
+    }
   }
 
-  & .item-header .titleWrapper .item-title {
-    font-size: 0.9rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  & .item-header .titleWrapper .item-price {
-    color: ${({ theme }) => theme.colors.text.gray};
-    font-size: 0.7rem;
-  }
-
-  & .quantity {
-    width: 60px;
+  .itemData-quantity {
+    width: max-content;
     margin-left: 10px;
-    padding: 10px 5px;
+    /* padding: 10px 5px; */
   }
 
-  & .total {
-    width: 20%;
-    display: flex;
+  .itemData-note {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+  }
+
+  .orderData {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 60px;
+    grid-gap: 10px;
     align-items: center;
-    justify-content: flex-end;
-    white-space: nowrap;
-  }
 
-  & .item-footer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-  }
+    .orderData-total {
+      white-space: nowrap;
+      text-align: end;
+    }
 
-  & .orderNote {
-    width: 100%;
-  }
-
-  & .col1 {
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  & .item-footer .button {
-    background-color: inherit;
-    border: ${({ theme }) => '1px solid ' + theme.colors.primary};
-    outline: none;
-    border-radius: 10px;
-    width: 60px;
-    margin-left: 10px;
-    margin-right: 3px;
-    transform: scale(1);
-    transition: 0.3s;
-  }
-  & .item-footer .button:hover {
-    transform: scale(1.1);
+    .orderData-delete .button {
+      background-color: inherit;
+      border: ${({ theme }) => '1px solid ' + theme.colors.primary};
+      outline: none;
+      border-radius: 10px;
+      width: 60px;
+      margin-left: 10px;
+      margin-right: 3px;
+      transform: scale(1);
+      transition: 0.3s;
+    }
+    .orderData-delete .button:hover {
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -140,43 +133,47 @@ const CartItem = ({ item }: Props) => {
     };
     dispatch(updateItemInCart(payload));
   };
+  const getWidth = (quantity: number) => {
+    // 50 is optimal width for 2 numbers;
+    return Math.max(50, 10 + quantity.toString().toString().length * 15) + 'px';
+  };
 
-  const roundedQuantity = (item.item.price * item.quantity).toFixed(2);
+  const newPrice = item.item.discount
+    ? +((item.item.price * (100 - item.item.discount)) / 100).toFixed(2)
+    : item.item.price;
+  const total = (newPrice * item.quantity).toFixed(2);
 
   return (
     <StyledDiv key={item.item.id} {...variants}>
-      <div className="item-header">
-        <div className="col1">
-          <img
-            className="img"
-            src={item.item.image}
-            alt={`${item.item.title} image`}
-          />
-          <div className="titleWrapper">
-            <span className="item-title">{item.item.title}</span>
-            <span className="item-price">$ {item.item.price}</span>
-          </div>
-          <Input
-            className="quantity"
-            align="center"
-            width="47px"
-            value={item.quantity}
-            onChange={updateQuantity}
-          />
+      <div className="itemData">
+        <img
+          className="itemData-img"
+          src={item.item.image}
+          alt={`${item.item.title} image`}
+        />
+        <div className="itemData-titleWrapper">
+          <span className="itemData-title">{item.item.title}</span>
+          <span className="itemData-price">$ {newPrice}</span>
         </div>
-        <span className="total">$ {roundedQuantity}</span>
+        <Input
+          className="quantity"
+          align="center"
+          width={getWidth(item.quantity)}
+          value={item.quantity}
+          onChange={updateQuantity}
+          type="number"
+        />
+        <Input
+          className="itemData-note"
+          width="250px"
+          value={item.note}
+          onChange={updateNote}
+          placeholder="Order note..."
+        />
       </div>
-      <div className="item-footer">
-        <div className="col1">
-          <Input
-            className="orderNote"
-            width="250px"
-            value={item.note}
-            onChange={updateNote}
-            placeholder="Order note..."
-          />
-        </div>
-        <div className="total">
+      <div className="orderData">
+        <span className="orderData-total">$ {total}</span>
+        <div className="orderData-delete">
           <button className="button">
             <Icon
               onClick={handleDelete}

@@ -70,6 +70,7 @@ const cartSlice = createSlice({
         (cartItem) => cartItem.item.id === payload.item.id
       );
       if (index < 0) throw new Error('[updateItemInCart] No dish found!');
+      if (payload.quantity > 99) state.items[index].quantity = 99;
       else state.items[index].quantity = payload.quantity;
     },
     updateOrderNote(

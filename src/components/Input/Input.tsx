@@ -7,14 +7,15 @@ export type InputProps = {
   align?: 'center' | 'left' | 'right';
 };
 
-type Props = InputProps & {
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  className?: string;
-  icon?: JSX.Element;
-};
+type Props = InputProps &
+  React.InputHTMLAttributes<HTMLInputElement> & {
+    value: string | number;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    placeholder?: string;
+    className?: string;
+    icon?: JSX.Element;
+  };
 
 const StyledInput = styled.div<InputProps>`
   display: flex;
@@ -34,7 +35,7 @@ const StyledInput = styled.div<InputProps>`
     color: ${({ color, theme }) => color || theme.colors.text.light};
     font-weight: 100;
     font-size: 0.85rem;
-    width: ${({ width = '240px' }) => width};
+    width: 100%;
     text-align: ${({ align = 'left' }) => align};
   }
 `;
@@ -44,6 +45,8 @@ const Input = (props: Props) => {
     <StyledInput {...props}>
       {props.icon}
       <input
+        // TODO: add styling for number type input
+        // {...props}
         value={props.value}
         onKeyPress={props.onKeyPress}
         onChange={props.onChange}
