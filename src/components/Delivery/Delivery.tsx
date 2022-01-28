@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
+import {
+  DeliveryType,
+  labels,
+  updateOrderDelivery,
+} from '@/store/features/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 const StyledCheckbox = styled.div`
   height: 52px;
@@ -40,14 +46,13 @@ const StyledDiv = styled.div`
   display: flex;
 `;
 
-const labels = ['dine in', 'to go', 'delivery'];
-
 function Delivery() {
-  const [delivery, setDelivery] = useState('dineIn');
+  const { delivery } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
 
   const handleSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const id = e.currentTarget.id;
-    setDelivery(id);
+    const id = e.currentTarget.id as DeliveryType;
+    dispatch(updateOrderDelivery({ delivery: id }));
   };
 
   return (

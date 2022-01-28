@@ -7,8 +7,13 @@ export interface ICartItem {
   note: string;
 }
 
+export const labels = ['dine in', 'to go', 'delivery'] as const;
+export type DeliveryType = typeof labels[number];
+
 interface ICartState {
   items: ICartItem[];
+  delivery: DeliveryType;
+  total: number;
 }
 
 interface IUpdateOrderNotePayload {
@@ -20,8 +25,18 @@ interface IUpdateItemInCart {
   quantity: number;
 }
 
+interface IUpdateOrderDelivery {
+  delivery: DeliveryType;
+}
+
+interface IUpdateOrderTotal {
+  total: number;
+}
+
 const initialState: ICartState = {
   items: [],
+  delivery: labels[0],
+  total: 0,
 };
 
 const cartSlice = createSlice({
@@ -85,6 +100,15 @@ const cartSlice = createSlice({
       if (state.items[index].note === payload.note) return;
       state.items[index].note = payload.note;
     },
+    updateOrderDelivery(
+      state,
+      { payload }: PayloadAction<IUpdateOrderDelivery>
+    ) {
+      state.delivery = payload.delivery;
+    },
+    updateOrderTotal(state, { payload }: PayloadAction<IUpdateOrderTotal>) {
+      state.total = payload.total;
+    },
   },
 });
 
@@ -93,5 +117,6 @@ export const {
   deleteItemFromCart,
   updateItemInCart,
   updateOrderNote,
+  updateOrderDelivery,
 } = cartSlice.actions;
 export default cartSlice.reducer;
