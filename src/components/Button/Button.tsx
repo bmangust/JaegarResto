@@ -1,21 +1,37 @@
 import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
 
-const MainButton = styled.button`
+interface Props {
+  variant?: 'filled' | 'outline' | 'text';
+  color?: 'primary' | 'secondary' | AccentType;
+}
+
+const getColor = (theme: Theme, color?: Props['color']) => {
+  if (!color || color === 'primary') return theme.colors.primary;
+  if (color === 'secondary') return theme.colors.secondary;
+  return theme.colors.accent[color];
+};
+
+const MainButton = styled.button<Props>`
   padding: 20px;
-  border: none;
+  border: ${({ theme, variant, color }) =>
+    '1px solid ' + getColor(theme, color)}};
   border-radius: 8px;
-  background-color: ${({
-    theme,
-    color,
-  }: {
-    theme: Theme;
-    color?: AccentType;
-  }) => (color ? theme.colors.accent[color] : theme.colors.primary)};
-  box-shadow: ${({ theme }) => '0 8px 24px ' + theme.colors.base.orange};
-  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme, variant, color }) => {
+    if (variant === 'outline' || variant === 'text') return 'none';
+    return getColor(theme, color);
+  }};
+  color: ${({ theme, variant, color }) => {
+    if (!variant || variant === 'filled') return theme.colors.white;
+    return getColor(theme, color);
+  }};
   font-size: 1rem;
   cursor: pointer;
+
+  &:active,
+  &:hover {
+    box-shadow: ${({ theme, color }) => '0 0 15px' + getColor(theme, color)};
+  }
 `;
 
 export default MainButton;

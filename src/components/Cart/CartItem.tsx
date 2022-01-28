@@ -175,12 +175,7 @@ const CartItem = ({ item }: Props) => {
         <span className="orderData-total">$ {total}</span>
         <div className="orderData-delete">
           <button className="button">
-            <Icon
-              onClick={handleDelete}
-              icon="delete"
-              color="white"
-              active={false}
-            />
+            <Icon onClick={handleDelete} icon="delete" active={false} />
           </button>
         </div>
       </div>
