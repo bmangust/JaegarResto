@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getDiscountedPrice } from 'src/util';
 import { Dish } from '../menu/menuSlice';
 
 export interface ICartItem {
@@ -39,6 +40,15 @@ const initialState: ICartState = {
   total: 0,
 };
 
+const getTotalSum = (items: ICartItem[]) =>
+  +items
+    .reduce((prev, cur) => {
+      const price = getDiscountedPrice(cur.item);
+      prev += price * cur.quantity;
+      return prev;
+    }, 0)
+    .toFixed(2);
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -61,6 +71,19 @@ const cartSlice = createSlice({
       );
       if (index < 0) state.items.push({ item: payload, quantity: 1, note: '' });
       else state.items[index].quantity++;
+      state.total = getTotalSum(state.items);
+    },
+    subtractItemToFromCart(state, { payload }: PayloadAction<Dish>) {
+      // do not need to create new deep copy because we use @redux/toolkit with immer
+      // we could even mutate state, because it's an immer proxy
+      const index = state.items.findIndex(
+        (cartItem) => cartItem.item.id === payload.id
+      );
+      if (index < 0) return;
+      if (state.items[index].quantity === 1)
+        state.items = state.items.filter((item) => item.item.id !== payload.id);
+      else state.items[index].quantity--;
+      state.total = getTotalSum(state.items);
     },
     /**
      * remove passed Dish from cart completeley
@@ -72,6 +95,7 @@ const cartSlice = createSlice({
       state.items = state.items.filter(
         (cartItem) => cartItem.item.id !== payload.id
       );
+      state.total = getTotalSum(state.items);
     },
     /**
      * 1. find index
@@ -87,6 +111,7 @@ const cartSlice = createSlice({
       if (index < 0) throw new Error('[updateItemInCart] No dish found!');
       if (payload.quantity > 99) state.items[index].quantity = 99;
       else state.items[index].quantity = payload.quantity;
+      state.total = getTotalSum(state.items);
     },
     updateOrderNote(
       state,
@@ -106,14 +131,12 @@ const cartSlice = createSlice({
     ) {
       state.delivery = payload.delivery;
     },
-    updateOrderTotal(state, { payload }: PayloadAction<IUpdateOrderTotal>) {
-      state.total = payload.total;
-    },
   },
 });
 
 export const {
   addItemToCart,
+  subtractItemToFromCart,
   deleteItemFromCart,
   updateItemInCart,
   updateOrderNote,

@@ -1,8 +1,12 @@
+import { MouseEventHandler } from 'react';
 import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useAppDispatch } from '@/store/hooks';
-import { addItemToCart } from '@/store/features/cart/cartSlice';
+import {
+  addItemToCart,
+  subtractItemToFromCart,
+} from '@/store/features/cart/cartSlice';
 import Discount from './Discount';
 import Price from './Price';
 
@@ -65,8 +69,9 @@ const variants = {
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const dispatch = useAppDispatch();
-  const handleClick = () => {
-    dispatch(addItemToCart(item));
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (e.shiftKey || e.altKey) dispatch(subtractItemToFromCart(item));
+    else dispatch(addItemToCart(item));
   };
   return (
     <StyledMenuItem onClick={handleClick} {...variants}>
