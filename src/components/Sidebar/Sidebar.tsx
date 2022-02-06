@@ -7,7 +7,7 @@ import {
   setCurrentPage,
 } from '@/store/features/toolbar/toolbarSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import Icon, { LogoutIcon } from '@/components/Icon/Icon';
+import SidebarIcon, { LogoutIcon } from '@/components/Icon/Icon';
 import Link from 'next/link';
 import { useRouter } from 'next/dist/client/router';
 
@@ -65,7 +65,7 @@ const Sidebar: React.FC = (props) => {
       {icons.map((name) => (
         <Link href={name === 'home' ? '/' : `/${name}`} key={name}>
           <a tabIndex={0} style={{ zIndex: active === name ? 2 : 1 }}>
-            <Icon
+            <SidebarIcon
               onClick={() => handleClick(name)}
               icon={name}
               width="3.5rem"

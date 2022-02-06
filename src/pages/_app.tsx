@@ -10,6 +10,7 @@ import { store } from '@/store/store';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import Cart from '@/components/Cart/Cart';
+import Payment from '@/components/Payment/Payment';
 
 const StyledApp = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <PageWrapper>
             <Component {...pageProps} />
           </PageWrapper>
-          <Cart />
+          <Payment />
         </StyledApp>
       </ThemeProvider>
     </Provider>
