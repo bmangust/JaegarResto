@@ -3,7 +3,7 @@ import styled, { ThemeContext, useTheme } from 'styled-components';
 import { Page } from '@/store/features/toolbar/toolbarSlice';
 
 interface IconProps {
-  active: boolean;
+  active?: boolean;
   color?: string;
   backgroundColor?: string;
   dropShadow?: string;
@@ -76,7 +76,26 @@ const StyledIcon = styled.div<IconProps>`
   }
 `;
 
-export const Icon: React.FC<IconProps> = (props: IconProps) => {
+const NormalIcon = styled.div<IconProps>`
+  padding: 0.7rem 1.2rem;
+  color: ${({ active, theme }) =>
+    active ? theme.colors.text.light : theme.colors.base.darkLine};
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: pointer;
+
+  & svg {
+    transition: 0.3s;
+    transform: scale(1.2);
+    fill: ${({ theme, active, color }) =>
+      active ? (color ? color : theme.colors.white) : theme.colors.text.light};
+  }
+  & div:hover svg {
+    transform: scale(1.4);
+  }
+`;
+
+export const SidebarIcon: React.FC<IconProps> = (props: IconProps) => {
   const theme = useContext(ThemeContext);
   const color = props.active ? theme.colors.white : theme.colors.primary;
 
@@ -118,6 +137,101 @@ export const HomeIcon: React.FC<IconProps> = (props) => {
         </svg>
       </div>
     </StyledIcon>
+  );
+};
+
+export const TickIcon = (props: IconProps) => {
+  return (
+    <NormalIcon {...props}>
+      <div>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 15 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M10.8635 6.40362L7.81816 10.4036C7.69283 10.5683 7.49883 10.6656 7.29216 10.667H7.2875C7.08283 10.667 6.8895 10.5723 6.76283 10.411L5.1415 8.33962C4.91483 8.05028 4.9655 7.63095 5.2555 7.40428C5.54483 7.17695 5.96483 7.22762 6.1915 7.51828L7.28016 8.90895L9.80283 5.59628C10.0255 5.30362 10.4435 5.24628 10.7375 5.46962C11.0302 5.69295 11.0868 6.11095 10.8635 6.40362ZM8.00016 1.33362C4.31816 1.33362 1.3335 4.31828 1.3335 8.00028C1.3335 11.6816 4.31816 14.667 8.00016 14.667C11.6822 14.667 14.6668 11.6816 14.6668 8.00028C14.6668 4.31828 11.6822 1.33362 8.00016 1.33362Z"
+            fill={props.color}
+          />
+          <mask
+            id="mask0_704_1737"
+            type="alpha"
+            // style="mask-type:alpha"
+            maskUnits="userSpaceOnUse"
+            x="1"
+            y="1"
+            width="14"
+            height="14"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10.8635 6.40362L7.81816 10.4036C7.69283 10.5683 7.49883 10.6656 7.29216 10.667H7.2875C7.08283 10.667 6.8895 10.5723 6.76283 10.411L5.1415 8.33962C4.91483 8.05028 4.9655 7.63095 5.2555 7.40428C5.54483 7.17695 5.96483 7.22762 6.1915 7.51828L7.28016 8.90895L9.80283 5.59628C10.0255 5.30362 10.4435 5.24628 10.7375 5.46962C11.0302 5.69295 11.0868 6.11095 10.8635 6.40362ZM8.00016 1.33362C4.31816 1.33362 1.3335 4.31828 1.3335 8.00028C1.3335 11.6816 4.31816 14.667 8.00016 14.667C11.6822 14.667 14.6668 11.6816 14.6668 8.00028C14.6668 4.31828 11.6822 1.33362 8.00016 1.33362Z"
+            />
+          </mask>
+          <g mask="url(#mask0_704_1737)">
+            <rect width="16" height="16" fill={props.color} />
+          </g>
+        </svg>
+      </div>
+    </NormalIcon>
+  );
+};
+export const CashIcon = (props: IconProps) => {
+  return (
+    <NormalIcon {...props}>
+      <div>
+        <svg
+          width="25"
+          height="23"
+          viewBox="0 0 21 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M14.688 0.5C17.8978 0.5 20.5 3.16116 20.5 6.44374V13.5563C20.5 16.8388 17.8978 19.5 14.688 19.5H6.31204C3.10219 19.5 0.5 16.8388 0.5 13.5563V6.44374C0.5 3.16116 3.10219 0.5 6.31204 0.5H14.688ZM14.688 1.98651H6.31204C3.90498 1.98651 1.95358 3.98213 1.95358 6.44374V13.5563C1.95358 16.0179 3.90498 18.0135 6.31204 18.0135H14.688C17.095 18.0135 19.0464 16.0179 19.0464 13.5563L19.046 13.279L15.8499 13.2798C14.0084 13.2787 12.5159 11.7531 12.5147 9.86949C12.5147 8.04914 13.9101 6.56244 15.6673 6.46431L15.8504 6.45916L19.046 6.459L19.0464 6.44374C19.0464 4.05454 17.2081 2.10431 14.8991 1.99165L14.688 1.98651ZM19.046 7.945L15.8508 7.94567C14.8109 7.94632 13.9683 8.80743 13.9683 9.86904C13.9689 10.8811 14.7329 11.7102 15.7033 11.7874L15.8504 11.7933L19.046 11.793V7.945ZM16.2942 9.06518C16.6956 9.06518 17.021 9.39795 17.021 9.80844C17.021 10.1847 16.7475 10.4957 16.3928 10.5449L16.2942 10.5517H15.9921C15.5907 10.5517 15.2653 10.2189 15.2653 9.80844C15.2653 9.43215 15.5388 9.12118 15.8935 9.07196L15.9921 9.06518H16.2942ZM10.8539 4.99736C11.2553 4.99736 11.5807 5.33013 11.5807 5.74062C11.5807 6.1169 11.3073 6.42788 10.9525 6.47709L10.8539 6.48388H5.62203C5.22063 6.48388 4.89524 6.15111 4.89524 5.74062C4.89524 5.36434 5.16866 5.05337 5.5234 5.00415L5.62203 4.99736H10.8539Z" />
+        </svg>
+      </div>
+    </NormalIcon>
+  );
+};
+export const CreditCardIcon = (props: IconProps) => {
+  return (
+    <NormalIcon {...props}>
+      <svg
+        width="30"
+        height="23"
+        viewBox="0 0 23 16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0.75 5C0.75 2.37665 2.87665 0.25 5.5 0.25H17.5C20.1234 0.25 22.25 2.37665 22.25 5V11C22.25 13.6234 20.1234 15.75 17.5 15.75H5.5C2.87665 15.75 0.75 13.6234 0.75 11V5ZM2.33697 4.25H20.663C20.3245 2.81665 19.0368 1.75 17.5 1.75H5.5C3.96321 1.75 2.67555 2.81665 2.33697 4.25ZM20.75 5.75H2.25V11C2.25 12.7949 3.70507 14.25 5.5 14.25H17.5C19.2949 14.25 20.75 12.7949 20.75 11V5.75ZM12.75 11C12.75 10.5858 13.0858 10.25 13.5 10.25H17.5C17.9142 10.25 18.25 10.5858 18.25 11C18.25 11.4142 17.9142 11.75 17.5 11.75H13.5C13.0858 11.75 12.75 11.4142 12.75 11Z"
+        />
+      </svg>
+    </NormalIcon>
+  );
+};
+export const PayPalIcon = (props: IconProps) => {
+  return (
+    <NormalIcon {...props}>
+      <svg
+        width="23"
+        height="23"
+        viewBox="0 0 19 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15 5.2C16.7 6.2 17.5 8 17.5 10C17.5 12.5 15 14.5 12.5 14.5H9.9L9.3 18.1C9.25325 18.3293 9.12758 18.5349 8.94486 18.6811C8.76214 18.8272 8.53395 18.9047 8.3 18.9H5.6C5.52501 18.9015 5.45064 18.8861 5.38239 18.855C5.31415 18.8239 5.25378 18.7778 5.20577 18.7202C5.15775 18.6626 5.12331 18.5949 5.105 18.5222C5.08669 18.4494 5.08498 18.3735 5.1 18.3L5.3 16.9M7.5 11H10C12.5 11 15 8.5 15 6C15 3 13.1 1 10 1H4.5C4 1 3.5 1.5 3.5 2L1.5 16C1.5 16.5 2 17 2.5 17H5.3L6.5 12C6.6 11.4 6.9 11 7.5 11Z"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </NormalIcon>
   );
 };
 export const DiscountIcon = (props: IconProps) => {
@@ -262,4 +376,4 @@ export const DeleteIcon = (props: IconProps) => {
   );
 };
 
-export default Icon;
+export default SidebarIcon;

@@ -1,6 +1,6 @@
 import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
-import Icon from '@/components/Icon/Icon';
+import SidebarIcon from '@/components/Icon/Icon';
 import Input from '@/components/Input/Input';
 import {
   deleteItemFromCart,
@@ -175,7 +175,7 @@ const CartItem = ({ item }: Props) => {
         <span className="orderData-total">$ {total}</span>
         <div className="orderData-delete">
           <button className="button">
-            <Icon onClick={handleDelete} icon="delete" active={false} />
+            <SidebarIcon onClick={handleDelete} icon="delete" active={false} />
           </button>
         </div>
       </div>
