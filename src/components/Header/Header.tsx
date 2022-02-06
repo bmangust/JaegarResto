@@ -9,6 +9,10 @@ const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .header-search {
+    width: 14rem;
+  }
 `;
 
 const Header = (props: HeaderProps) => {
@@ -16,7 +20,10 @@ const Header = (props: HeaderProps) => {
   return (
     <StyledHeader>
       <Title mainText="Jaegar Resto" secondaryText={date} />
-      <Search onSubmit={(value) => console.log(value)} />
+      <Search
+        className="header-search"
+        onSubmit={(value) => console.log(value)}
+      />
     </StyledHeader>
   );
 };

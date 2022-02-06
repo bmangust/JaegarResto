@@ -6,6 +6,7 @@ import SearchIcon from './SearchIcon';
 
 interface SearchProps {
   onSubmit: (value: string) => void;
+  className?: string;
 }
 
 const Search = (props: SearchProps) => {
@@ -27,6 +28,7 @@ const Search = (props: SearchProps) => {
 
   return (
     <Input
+      className={props.className}
       icon={<SearchIcon />}
       value={value}
       onChange={handleChange}
