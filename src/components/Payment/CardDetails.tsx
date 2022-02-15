@@ -22,15 +22,16 @@ const StyledDiv = styled.div`
   gap: 0.7rem;
   margin-top: 1rem;
 
+  .client,
   .block,
   .orderType {
     display: flex;
-    gap: 1rem;
+    gap: 0.7rem;
   }
 
   .client {
-    padding-bottom: 0.7rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    padding-bottom: 1rem;
     border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkLine};
   }
 `;
@@ -84,6 +85,7 @@ const CardDetails = () => {
 
           <InputWithLabel
             id="cvv"
+            type="password"
             value={state?.cvv}
             onChange={handleInputChange}
             label="CVV"
