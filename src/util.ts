@@ -11,3 +11,11 @@ export const getDiscountedPrice = (item: Dish) => {
     ? +((item.price * (100 - item.discount)) / 100).toFixed(2)
     : item.price;
 };
+
+export const isNumeric = (str: string): boolean => {
+  return +str + '' === str;
+};
+
+export const isEmpty = (str: string) => {
+  return str.length === 0;
+};

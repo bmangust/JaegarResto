@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
 import {

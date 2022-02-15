@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/Button/Button';
 import PaymentMethod from './PaymentMethod';
+import CardDetails from './CardDetails';
 
 const StyledContainer = styled(motion.div)`
   width: max(30vw, 400px);
@@ -22,6 +23,7 @@ const StyledContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkLine};
 
     .payment-title {
       font-size: max(1.5rem, 24pt);
@@ -49,6 +51,7 @@ function Payment() {
       </div>
       <div className="payment-body">
         <PaymentMethod />
+        <CardDetails />
       </div>
       <div className="payment-buttons">
         <Button variant="outline">Cancel</Button>

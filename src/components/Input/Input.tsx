@@ -46,7 +46,7 @@ const Input = (props: Props) => {
       {props.icon}
       <input
         // TODO: add styling for number type input
-        // {...props}
+        {...props}
         value={props.value}
         onKeyPress={props.onKeyPress}
         onChange={props.onChange}

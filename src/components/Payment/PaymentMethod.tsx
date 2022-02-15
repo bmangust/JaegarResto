@@ -2,8 +2,6 @@ import React, { ChangeEvent, useState } from 'react';
 import PaymentItem from './PaymentItem';
 import styled from 'styled-components';
 
-interface Props {}
-
 const StyledDiv = styled.div`
   .paymentMethod-header {
     color: ${({ theme }) => theme.colors.white};
@@ -19,10 +17,9 @@ const StyledDiv = styled.div`
 const PAYMENTS = ['Credit Card', 'PayPal', 'Cash'] as const;
 export type PaymentVariant = typeof PAYMENTS[number];
 
-const PaymentMethod = (props: Props) => {
+const PaymentMethod = () => {
   const [payment, setPayment] = useState<PaymentVariant>(PAYMENTS[0]);
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     setPayment(e.currentTarget.value as PaymentVariant);
   };
   return (
@@ -31,6 +28,7 @@ const PaymentMethod = (props: Props) => {
       <div className="paymentMethod-items">
         {PAYMENTS.map((item) => (
           <PaymentItem
+            key={item}
             name={item}
             active={payment === item}
             onChange={onChange}
