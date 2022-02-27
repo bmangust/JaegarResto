@@ -1,12 +1,16 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import CartListFooter from '@/components/Cart/CartListFooter';
 import CartList from '@/components/Cart/CartList';
 import OrderHeader from '../Order/OrderHeader';
 import { ArrowIcon } from '../Icon/Icon';
+import { useAppDispatch } from '@/store/hooks';
+import { showCartBar } from '@/store/features/toolbar/toolbarSlice';
 
 const StyledContainer = styled(motion.div)`
+  position: absolute;
+  right: max(30vw, 400px);
   width: max(30vw, 400px);
   height: 100vh;
   padding: 24px;
@@ -15,9 +19,8 @@ const StyledContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: sticky;
   top: 0;
-  left: 0;
+  z-index: 4;
 
   .cart-header {
     height: 130px;
@@ -40,17 +43,39 @@ const StyledContainer = styled(motion.div)`
   }
 `;
 
+const variants = {
+  animate: {
+    x: 0,
+    transition: {
+      delay: 0.1,
+      duration: 0.1,
+    },
+  },
+  initial: { x: '100%' },
+  exit: {
+    x: '100%',
+  },
+};
+
 function Confirmation() {
+  const dispatch = useAppDispatch();
+
+  const handleBack = () => {
+    dispatch(showCartBar());
+  };
   return (
-    <StyledContainer>
-      <OrderHeader
-        title="Confirmation"
-        subtitle="Order #12345"
-        icon={<ArrowIcon />}
-      />
-      <CartList hideHeader />
-      <CartListFooter />
-    </StyledContainer>
+    <AnimatePresence exitBeforeEnter>
+      <StyledContainer key="Confirmation" {...variants}>
+        <OrderHeader
+          title="Confirmation"
+          subtitle="Order #12345"
+          icon={<ArrowIcon />}
+          onClick={handleBack}
+        />
+        <CartList hideHeader />
+        <CartListFooter />
+      </StyledContainer>
+    </AnimatePresence>
   );
 }
 

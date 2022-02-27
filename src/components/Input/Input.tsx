@@ -38,6 +38,16 @@ const StyledInput = styled.div<InputProps>`
     width: 100%;
     text-align: ${({ align = 'left' }) => align};
   }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+  }
 `;
 
 const Input = (props: Props) => {

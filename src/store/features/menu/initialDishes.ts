@@ -75,14 +75,6 @@ export const initialDishes: Dish[] = [
     image: '/images/Image 9.png',
   },
   {
-    id: 9,
-    title: 'Healthy noodle with spinach leaf',
-    category: 'Grill',
-    price: 3.59,
-    avalible: 17,
-    image: '/images/Image 7.png',
-  },
-  {
     id: 10,
     title: 'Bowl of creamy carrot soup',
     category: 'Soup',

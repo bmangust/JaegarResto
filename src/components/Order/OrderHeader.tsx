@@ -39,12 +39,17 @@ interface Props {
   icon?: JSX.Element;
   title: string;
   subtitle?: string;
+  onClick?: () => void;
 }
 
-const OrderHeader = ({ title, subtitle, icon }: Props) => {
+const OrderHeader = ({ title, subtitle, icon, onClick }: Props) => {
   return (
     <StyledDiv>
-      {icon && <button className="button">{icon}</button>}
+      {icon && (
+        <button className="button" onClick={onClick}>
+          {icon}
+        </button>
+      )}
       <h2 className="title">{title}</h2>
       {subtitle && <h3 className="subtitle">{subtitle}</h3>}
     </StyledDiv>

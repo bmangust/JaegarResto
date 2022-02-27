@@ -31,6 +31,13 @@ const Button = styled.button<Props>`
   &:hover {
     box-shadow: ${({ theme, color }) => '0 0 15px' + getColor(theme, color)};
   }
+
+  &:disabled {
+    background: none;
+    box-shadow: none;
+    border: 1px solid ${({ theme }) => theme.colors.base.darkLine};
+    color: ${({ theme }) => theme.colors.text.dark};
+  }
 `;
 
 export default Button;

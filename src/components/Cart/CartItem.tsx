@@ -101,9 +101,9 @@ const variants = {
       duration: 0.1,
     },
   },
-  initial: { x: '-100%' },
+  initial: { x: '100%' },
   exit: {
-    x: '-100%',
+    x: '100%',
   },
 };
 

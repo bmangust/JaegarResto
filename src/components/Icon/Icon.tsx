@@ -130,9 +130,9 @@ export const ArrowIcon: React.FC = () => {
       <path
         d="M8.5 16.5L4 12M4 12L8.5 7.5M4 12L20 12"
         stroke="currentColor"
-        stroke-width="1.8"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

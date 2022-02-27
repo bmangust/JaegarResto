@@ -43,7 +43,8 @@ export const toolbarSlice = createSlice({
   },
 });
 
-export const { setCurrentPage } = toolbarSlice.actions;
+export const { setCurrentPage, showCartBar, showPaymentBar } =
+  toolbarSlice.actions;
 
 export const selectCurrentPage = (state: RootState) => state.toolbar.current;
 export default toolbarSlice.reducer;
