@@ -1,7 +1,6 @@
-import { useAppSelector } from '@/store/hooks';
-import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react';
 import styled from 'styled-components';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useAppSelector } from '@/store/hooks';
 import CartItem from './CartItem';
 import CartListHeader from './CartListHeader';
 
@@ -41,11 +40,15 @@ const infoVariants = {
   },
 };
 
-function CartList() {
+interface Props {
+  hideHeader?: boolean;
+}
+
+function CartList({ hideHeader }: Props) {
   const items = useAppSelector((state) => state.cart.items);
   return (
     <StyledDiv {...variants} layout>
-      <CartListHeader />
+      {!hideHeader && <CartListHeader />}
       <AnimatePresence>
         {items.map((el) => (
           <CartItem item={el} key={el.item.id} />

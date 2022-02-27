@@ -1,5 +1,5 @@
-import { Dish } from '@/store/features/menu/menuSlice';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import SidebarIcon from '@/components/Icon/Icon';
 import Input from '@/components/Input/Input';
 import {
@@ -8,9 +8,7 @@ import {
   updateItemInCart,
   updateOrderNote,
 } from '@/store/features/cart/cartSlice';
-import React from 'react';
 import { useAppDispatch } from '@/store/hooks';
-import { motion } from 'framer-motion';
 
 interface Props {
   item: ICartItem;
