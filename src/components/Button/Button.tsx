@@ -1,10 +1,10 @@
 import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
 
-interface Props {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'filled' | 'outline' | 'text';
   color?: 'primary' | 'secondary' | AccentType;
-}
+};
 
 const getColor = (theme: Theme, color?: Props['color']) => {
   if (!color || color === 'primary') return theme.colors.primary;
@@ -12,10 +12,9 @@ const getColor = (theme: Theme, color?: Props['color']) => {
   return theme.colors.accent[color];
 };
 
-const MainButton = styled.button<Props>`
+const Button = styled.button<Props>`
   padding: 20px;
-  border: ${({ theme, variant, color }) =>
-    '1px solid ' + getColor(theme, color)}};
+  border: ${({ theme, color }) => '1px solid ' + getColor(theme, color)};
   border-radius: 8px;
   background: ${({ theme, variant, color }) => {
     if (variant === 'outline' || variant === 'text') return 'none';
@@ -34,4 +33,4 @@ const MainButton = styled.button<Props>`
   }
 `;
 
-export default MainButton;
+export default Button;
