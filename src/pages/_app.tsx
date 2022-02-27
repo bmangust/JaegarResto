@@ -9,8 +9,7 @@ import theme from '@/styles/theme';
 import { store } from '@/store/store';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import Cart from '@/components/Cart/Cart';
-import Payment from '@/components/Payment/Payment';
+import Order from '@/components/Order/Order';
 
 const StyledApp = styled.div`
   display: flex;
@@ -36,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <PageWrapper>
             <Component {...pageProps} />
           </PageWrapper>
-          <Payment />
+          <Order />
         </StyledApp>
       </ThemeProvider>
     </Provider>

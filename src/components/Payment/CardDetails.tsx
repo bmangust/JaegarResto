@@ -1,8 +1,12 @@
 import React, { ChangeEvent, useState } from 'react';
-import { DeliveryType } from '@/store/features/cart/cartSlice';
 import styled from 'styled-components';
 import InputWithLabel from '../Input/InputWithLabel';
 import { isEmpty, isNumeric } from 'src/util';
+import {
+  DeliveryType,
+  updatePayment,
+} from '@/store/features/payment/paymentSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 interface State {
   cardholderName: string;
@@ -37,27 +41,13 @@ const StyledDiv = styled.div`
 `;
 
 const CardDetails = () => {
-  const [state, setState] = useState<State>({
-    cardholderName: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvv: '',
-    orderType: 'dine in',
-    table: '',
-  });
+  const state = useAppSelector((state) => state.payment);
+  const dispatch = useAppDispatch();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (
-      (e.target.id === 'cardNumber' || e.target.id === 'cvv') &&
-      !isEmpty(e.target.value) &&
-      !isNumeric(e.target.value)
-    )
-      return;
-    setState({
-      ...state,
-      [e.target.id as StateKeys]: e.target.value.toLocaleUpperCase(),
-    });
+    dispatch(updatePayment({ e }));
   };
+
   return (
     <StyledDiv>
       <div className="client">

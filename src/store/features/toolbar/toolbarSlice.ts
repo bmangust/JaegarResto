@@ -11,9 +11,12 @@ const pages = {
   delete: '',
 };
 
+type OrderBar = 'cart' | 'payment';
+
 export type Page = keyof typeof pages;
 interface ToolbarState {
   current: Page;
+  orderBar: OrderBar;
 }
 export const isPage = (value: string): value is Page => {
   return pages.hasOwnProperty(value);
@@ -21,6 +24,7 @@ export const isPage = (value: string): value is Page => {
 
 const initialState: ToolbarState = {
   current: 'home',
+  orderBar: 'cart',
 };
 
 export const toolbarSlice = createSlice({
@@ -29,6 +33,12 @@ export const toolbarSlice = createSlice({
   reducers: {
     setCurrentPage: (state, { payload }: PayloadAction<Page>) => {
       state.current = payload;
+    },
+    showCartBar: (state) => {
+      state.orderBar = 'cart';
+    },
+    showPaymentBar: (state) => {
+      state.orderBar = 'payment';
     },
   },
 });

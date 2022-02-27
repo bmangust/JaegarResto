@@ -1,17 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getDiscountedPrice } from 'src/util';
 import { Dish } from '../menu/menuSlice';
+import { deliveryLabels, DeliveryType } from '../payment/paymentSlice';
 
 export interface ICartItem {
   item: Dish;
   quantity: number;
   note: string;
 }
-
-export const labels = ['dine in', 'to go', 'delivery'] as const;
-export type DeliveryType = typeof labels[number];
-
-interface ICartState {
+export interface ICart {
   items: ICartItem[];
   delivery: DeliveryType;
   total: number;
@@ -30,13 +27,9 @@ interface IUpdateOrderDelivery {
   delivery: DeliveryType;
 }
 
-interface IUpdateOrderTotal {
-  total: number;
-}
-
-const initialState: ICartState = {
+const initialState: ICart = {
   items: [],
-  delivery: labels[0],
+  delivery: deliveryLabels[0],
   total: 0,
 };
 
@@ -86,7 +79,7 @@ const cartSlice = createSlice({
       state.total = getTotalSum(state.items);
     },
     /**
-     * remove passed Dish from cart completeley
+     * remove Dish from cart completeley
      * @param state
      * @param PayloadAction<Dish>
      */

@@ -1,12 +1,12 @@
 import React from 'react';
 import { AccentType, Theme } from '@/styles/theme';
 import styled from 'styled-components';
-import {
-  DeliveryType,
-  labels,
-  updateOrderDelivery,
-} from '@/store/features/cart/cartSlice';
+import { updateOrderDelivery } from '@/store/features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import {
+  deliveryLabels,
+  DeliveryType,
+} from '@/store/features/payment/paymentSlice';
 
 const StyledCheckbox = styled.div`
   height: 52px;
@@ -57,7 +57,7 @@ function Delivery() {
 
   return (
     <StyledDiv>
-      {labels.map((label) => (
+      {deliveryLabels.map((label) => (
         <StyledCheckbox key={label}>
           <input
             type="radio"

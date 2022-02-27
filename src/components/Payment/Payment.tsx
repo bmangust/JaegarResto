@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '@/components/Button/Button';
 import PaymentMethod from './PaymentMethod';
 import CardDetails from './CardDetails';
+import OrderHeader from '../Order/OrderHeader';
 
 const StyledContainer = styled(motion.div)`
   width: max(30vw, 400px);
@@ -17,20 +18,7 @@ const StyledContainer = styled(motion.div)`
   position: sticky;
   top: 0;
   left: 0;
-
-  .payment-header {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkLine};
-
-    .payment-title {
-      font-size: max(1.5rem, 24pt);
-      margin: 0;
-      margin-bottom: 1rem;
-    }
-  }
+  border-left: 1px solid ${({ theme }) => theme.colors.base.darkLine};
 
   .payment-body {
     flex-grow: 2;
@@ -46,9 +34,7 @@ const StyledContainer = styled(motion.div)`
 function Payment() {
   return (
     <StyledContainer>
-      <div className="payment-header">
-        <h2 className="payment-title">Payment</h2>
-      </div>
+      <OrderHeader title="Payment" />
       <div className="payment-body">
         <PaymentMethod />
         <CardDetails />
