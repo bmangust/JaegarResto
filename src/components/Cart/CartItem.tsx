@@ -28,6 +28,7 @@ const StyledDiv = styled(motion.div)`
     grid-auto-rows: 60px;
     align-items: center;
     margin-bottom: 10px;
+    width: 100%;
   }
 
   .itemData-img {

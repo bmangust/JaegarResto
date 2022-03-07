@@ -8,29 +8,8 @@ import OrderHeader from '../Order/OrderHeader';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { showCartBar } from '@/store/features/toolbar/toolbarSlice';
 
-const StyledContainer = styled.div`
-  width: max(30vw, 400px);
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  left: 0;
-  background-color: ${({ theme }) => theme.colors.base.darkerBG};
-  color: ${({ theme }) => theme.colors.white};
-  z-index: 5;
-
-  .motion {
-    height: 100vh;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-left: 1px solid ${({ theme }) => theme.colors.base.darkLine};
-
-    .payment-body {
-      flex-grow: 2;
-    }
-
-    .payment-buttons {
+const StyledContainer = styled(motion.div)`
+    .content-buttons {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 1rem;
@@ -54,7 +33,7 @@ const variants = {
   },
 };
 
-function Payment() {
+function Payment({ className }: Partial<HTMLDivElement>) {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -66,20 +45,20 @@ function Payment() {
     console.log({ cart });
   };
   return (
-    <StyledContainer>
-      <motion.div key="Payment" className="motion" {...variants}>
-        <OrderHeader title="Payment" />
-        <div className="payment-body">
-          <PaymentMethod />
-          <CardDetails />
-        </div>
-        <div className="payment-buttons">
-          <Button variant="outline" onClick={handleBack}>
-            Cancel
-          </Button>
-          <Button onClick={handlePayment}>Confirm Payment</Button>
-        </div>
-      </motion.div>
+    <StyledContainer key="Payment" className={className} {...variants}>
+      <OrderHeader className="content-header" title="Payment" />
+      <div className="content-body">
+        <PaymentMethod />
+        <CardDetails />
+      </div>
+      <div className="content-buttons">
+        <Button variant="outline" onClick={handleBack}>
+          Cancel
+        </Button>
+        <Button disabled={cart.items.length === 0} onClick={handlePayment}>
+          Confirm Payment
+        </Button>
+      </div>
     </StyledContainer>
   );
 }

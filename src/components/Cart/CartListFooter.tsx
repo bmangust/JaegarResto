@@ -5,8 +5,8 @@ const Div = styled.div`
   font-size: 1rem;
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.base.darkBG};
 
   .item {
     display: flex;

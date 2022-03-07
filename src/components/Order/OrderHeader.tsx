@@ -40,11 +40,12 @@ interface Props {
   title: string;
   subtitle?: string;
   onClick?: () => void;
+  className?: string;
 }
 
-const OrderHeader = ({ title, subtitle, icon, onClick }: Props) => {
+const OrderHeader = ({ className, title, subtitle, icon, onClick }: Props) => {
   return (
-    <StyledDiv>
+    <StyledDiv className={className}>
       {icon && (
         <button className="button" onClick={onClick}>
           {icon}

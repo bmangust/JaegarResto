@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAppSelector } from '@/store/hooks';
 import CartItem from './CartItem';
-import CartListHeader from './CartListHeader';
 
 const StyledDiv = styled(motion.div)`
-  flex-grow: 2;
   margin-top: 10px;
   max-height: calc(100vh - 148px - 75px);
+  height: 100%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -40,15 +39,10 @@ const infoVariants = {
   },
 };
 
-interface Props {
-  hideHeader?: boolean;
-}
-
-function CartList({ hideHeader }: Props) {
+function CartList() {
   const items = useAppSelector((state) => state.cart.items);
   return (
     <StyledDiv {...variants} layout>
-      {!hideHeader && <CartListHeader />}
       <AnimatePresence>
         {items.map((el) => (
           <CartItem item={el} key={el.item.id} />

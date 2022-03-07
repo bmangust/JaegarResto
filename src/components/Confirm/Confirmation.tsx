@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 import CartListFooter from '@/components/Cart/CartListFooter';
@@ -10,8 +10,8 @@ import { showCartBar } from '@/store/features/toolbar/toolbarSlice';
 
 const StyledContainer = styled(motion.div)`
   position: absolute;
-  right: max(30vw, 400px);
-  width: max(30vw, 400px);
+  right: 35vw;
+  width: 35vw;
   height: 100vh;
   padding: 24px;
   background-color: ${({ theme }) => theme.colors.base.darkerBG};
@@ -20,27 +20,7 @@ const StyledContainer = styled(motion.div)`
   flex-direction: column;
   justify-content: space-between;
   top: 0;
-  z-index: 4;
-
-  .cart-header {
-    height: 130px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.base.darkLine};
-  }
-
-  .title {
-    font-size: max(1.5rem, 24pt);
-    margin: 0;
-  }
-
-  .title2 {
-    font-size: max(1.2rem, 16pt);
-    margin: 0;
-    margin-bottom: 1rem;
-    color: ${({ theme }) => theme.colors.text.gray};
-  }
+  z-index: 3;
 `;
 
 const variants = {
@@ -57,25 +37,26 @@ const variants = {
   },
 };
 
-function Confirmation() {
+function Confirmation({ className }: Partial<HTMLDivElement>) {
   const dispatch = useAppDispatch();
 
   const handleBack = () => {
     dispatch(showCartBar());
   };
   return (
-    <AnimatePresence exitBeforeEnter>
-      <StyledContainer key="Confirmation" {...variants}>
-        <OrderHeader
-          title="Confirmation"
-          subtitle="Order #12345"
-          icon={<ArrowIcon />}
-          onClick={handleBack}
-        />
-        <CartList hideHeader />
-        <CartListFooter />
-      </StyledContainer>
-    </AnimatePresence>
+    <StyledContainer className={className} key="Confirmation" {...variants}>
+      <OrderHeader
+        title="Confirmation"
+        subtitle="Order #12345"
+        icon={<ArrowIcon />}
+        onClick={handleBack}
+        className="content-header"
+      />
+      <div className="content-body">
+        <CartList />
+      </div>
+      <CartListFooter />
+    </StyledContainer>
   );
 }
 

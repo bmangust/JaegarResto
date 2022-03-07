@@ -6,37 +6,7 @@ import CartList from './CartList';
 import CartListFooter from './CartListFooter';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { showPaymentBar } from '@/store/features/toolbar/toolbarSlice';
-
-const StyledContainer = styled.div`
-  width: max(30vw, 400px);
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  left: 0;
-  background-color: ${({ theme }) => theme.colors.base.darkerBG};
-  color: ${({ theme }) => theme.colors.white};
-
-  .motion {
-    height: 100vh;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    & .cart-header {
-      height: 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    & .title {
-      font-size: max(1.5rem, 24pt);
-      margin: 0;
-      margin-bottom: 1rem;
-    }
-  }
-`;
+import CartListHeader from './CartListHeader';
 
 const variants = {
   animate: {
@@ -51,7 +21,7 @@ const variants = {
   },
 };
 
-function Cart() {
+const Cart = ({ className }: Partial<HTMLDivElement>) => {
   const items = useAppSelector((state) => state.cart.items);
   const dispatch = useAppDispatch();
 
@@ -59,20 +29,21 @@ function Cart() {
     dispatch(showPaymentBar());
   };
   return (
-    <StyledContainer>
-      <motion.div key="Cart" className="motion" {...variants}>
-        <div className="cart-header">
-          <h2 className="title">Order #12345</h2>
-          <Delivery />
-        </div>
+    <motion.div className={className} key="Cart" {...variants}>
+      <div className="content-header">
+        <h2 className="content-title">Order #12345</h2>
+        <Delivery />
+        <CartListHeader />
+      </div>
+      <div className="content-body">
         <CartList />
-        <CartListFooter />
-        <Button disabled={items.length === 0} onClick={handlePayment}>
-          Continue to Payment
-        </Button>
-      </motion.div>
-    </StyledContainer>
+      </div>
+      <CartListFooter />
+      <Button disabled={items.length === 0} onClick={handlePayment}>
+        Continue to Payment
+      </Button>
+    </motion.div>
   );
-}
+};
 
 export default Cart;
