@@ -20,20 +20,24 @@ const StyledContainer = styled(motion.div)`
   flex-direction: column;
   justify-content: space-between;
   top: 0;
-  z-index: 3;
+  z-index: 3 !important;
 `;
 
 const variants = {
   animate: {
     x: 0,
+    opacity: 1,
     transition: {
-      delay: 0.1,
       duration: 0.1,
     },
   },
-  initial: { x: '100%' },
+  initial: { x: '100%', opacity: 0 },
   exit: {
     x: '100%',
+    opacity: 0,
+    transition: {
+      duration: 0.05,
+    },
   },
 };
 

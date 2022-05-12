@@ -20,7 +20,7 @@ interface IUpdateDelivery {
 }
 
 interface IUpdatePayment {
-  e: ChangeEvent<HTMLInputElement>;
+  e: ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 }
 
 const initialState: IPayment = {

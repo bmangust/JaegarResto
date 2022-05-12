@@ -9,11 +9,23 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { showCartBar } from '@/store/features/toolbar/toolbarSlice';
 
 const StyledContainer = styled(motion.div)`
-    .content-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 1rem;
-    }
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35vw;
+  height: 100vh;
+  padding: 24px;
+  /* background-color: ${({ theme }) => theme.colors.base.darkerBG};
+  color: ${({ theme }) => theme.colors.white};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
+  z-index: 6 !important;
+
+  .content-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
   }
 `;
 

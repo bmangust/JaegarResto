@@ -9,7 +9,6 @@ export type InputProps = {
 
 type Props = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & {
-    value: string | number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     placeholder?: string;
@@ -42,11 +41,10 @@ const StyledInput = styled.div<InputProps>`
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
   }
 
-  input[type='number'] {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
   }
 `;
 
@@ -55,7 +53,6 @@ const Input = (props: Props) => {
     <StyledInput {...props}>
       {props.icon}
       <input
-        // TODO: add styling for number type input
         {...props}
         value={props.value}
         onKeyPress={props.onKeyPress}

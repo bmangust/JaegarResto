@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from './Input';
 import classnames from 'classnames';
 import { StateKeys } from '@/components/Payment/CardDetails';
+import Select from './Select';
 
 const StyledInput = styled.div`
   display: flex;
@@ -24,8 +25,9 @@ interface InputWithLabelProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   id: StateKeys;
   label: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   value: string;
+  values?: string[];
   type?: 'text' | 'date' | 'password' | 'select';
   className?: string;
 }
@@ -34,11 +36,26 @@ const InputWithLabel = ({
   id,
   label,
   value,
+  values,
   type,
   onChange,
   className,
 }: InputWithLabelProps) => {
-  return (
+  return type === 'select' ? (
+    <StyledInput>
+      <label className="label" htmlFor={label}>
+        {label}
+      </label>
+      <Select
+        id={id}
+        value={value}
+        values={values}
+        onChange={onChange}
+        type={type}
+        className={classnames('fullWidth', className)}
+      />
+    </StyledInput>
+  ) : (
     <StyledInput>
       <label className="label" htmlFor={label}>
         {label}

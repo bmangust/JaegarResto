@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import InputWithLabel from '../Input/InputWithLabel';
 import { isEmpty, isNumeric } from 'src/util';
 import {
+  deliveryLabels,
   DeliveryType,
   updatePayment,
 } from '@/store/features/payment/paymentSlice';
@@ -31,6 +32,7 @@ const StyledDiv = styled.div`
   .orderType {
     display: flex;
     gap: 0.7rem;
+    width: 100%;
   }
 
   .client {
@@ -44,7 +46,9 @@ const CardDetails = () => {
   const state = useAppSelector((state) => state.payment);
   const dispatch = useAppDispatch();
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     dispatch(updatePayment({ e }));
   };
 
@@ -88,7 +92,8 @@ const CardDetails = () => {
           type="select"
           value={state?.orderType}
           onChange={handleInputChange}
-          label="Order Type"
+          label="Delivery"
+          values={[...deliveryLabels]}
         />
         <InputWithLabel
           id="table"
@@ -96,6 +101,7 @@ const CardDetails = () => {
           value={state?.table || ''}
           onChange={handleInputChange}
           label="Table"
+          values={new Array(10).fill('').map((_, i) => i.toString())}
         />
       </div>
     </StyledDiv>

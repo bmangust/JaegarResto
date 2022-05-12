@@ -57,6 +57,7 @@ const variants = {
   animate: {
     opacity: 1,
     transition: {
+      delay: 0.1,
       duration: 0.1,
     },
   },
@@ -74,14 +75,16 @@ const Order = () => {
   return (
     <StyledContainer>
       <AnimatePresence initial={false} exitBeforeEnter>
-        {currentView === 'cart' ? (
-          <Cart className="content" />
-        ) : (
-          <Payment className="content" />
-        )}
-        {currentView === 'payment' && <Confirmation className="content" />}
         {currentView === 'payment' && (
-          <motion.div {...variants} className="overlay" />
+          <Confirmation key="Confirmation" className="content" />
+        )}
+        {currentView === 'cart' ? (
+          <Cart key="Cart" className="content" />
+        ) : (
+          <Payment key="Payment" className="content" />
+        )}
+        {currentView === 'payment' && (
+          <motion.div key="overlay" {...variants} className="overlay" />
         )}
       </AnimatePresence>
     </StyledContainer>
